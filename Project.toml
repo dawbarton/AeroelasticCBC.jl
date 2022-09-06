@@ -15,6 +15,12 @@ StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
 Setfield = "1"
+ComponentArrays = "0.13"
+PGFPlotsX = "1"
+StaticArrays = "1"
+Plots = "1"
+OrdinaryDiffEq = "6"
+BifurcationKit = "0.2"
 julia = "1.8"
 
 [extras]
