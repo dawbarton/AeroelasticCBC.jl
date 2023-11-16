@@ -27,8 +27,8 @@ function trace_from_equilibrium(p0; save_par = nothing)
     optn_po = NewtonPar(verbose = false, tol = 1e-8, max_iterations = 25)
     if save_par !== nothing
         detect_bifurcation = 0
-        detect_event = 1
-        event = SaveAtEvent((save_par, 0.0))
+        detect_event = 1  # only works with 1 (nearest neighbour); 2 (bisection) fails
+        event = SaveAtEvent((save_par, 0.0))  # needs dummy parameter to prevent error
     else
         detect_bifurcation = 3
         detect_event = 0
