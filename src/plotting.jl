@@ -15,7 +15,7 @@ function fig_openloop()
             enlarge_x_limits=false,
         },
         PlotInc(
-            
+
         )
     )
 #     \begin{figure}
@@ -31,17 +31,17 @@ function fig_openloop()
 #         enlarge x limits=false,
 #         font={\sffamily},
 #       ]
-#         \addplot [mark=*, color=black, mark size=1pt, only marks] 
+#         \addplot [mark=*, color=black, mark size=1pt, only marks]
 #           table [x=velocity, y=heave, col sep=comma] {./Data/openloop_lco_day1.csv};
-#         \addplot [mark=*, color=black, mark size=1pt, only marks] 
+#         \addplot [mark=*, color=black, mark size=1pt, only marks]
 #           table [x=velocity, y=heave, col sep=comma] {./Data/openloop_lco_day2.csv};
-#         \addplot [mark=*, color=black, mark size=1pt, only marks] 
+#         \addplot [mark=*, color=black, mark size=1pt, only marks]
 #           table [x=velocity, y=heave, col sep=comma] {./Data/openloop_lco_day3.csv};
-#         \addplot [mark=*, color=black, mark size=1pt, only marks] 
+#         \addplot [mark=*, color=black, mark size=1pt, only marks]
 #           table [x=velocity, y=heave, col sep=comma] {./Data/openloop_lco_day4.csv};
-#         \addplot [mark=*, color=black, mark size=1pt, only marks] 
+#         \addplot [mark=*, color=black, mark size=1pt, only marks]
 #           table [x=velocity, y=heave, col sep=comma] {./Data/openloop_lco_day5.csv};
-#         \addplot [mark=*, color=black, mark size=1pt, only marks] 
+#         \addplot [mark=*, color=black, mark size=1pt, only marks]
 #           table [x=velocity, y=heave, col sep=comma] {./Data/openloop_lco_day6.csv};
 #         \addplot [mark=*, color=black, mark size=1pt, only marks]
 #           table [x=velocity, y=heave, col sep=comma] {./Data/openloop_eq.csv};
@@ -50,7 +50,6 @@ function fig_openloop()
 #     \caption{The response of the flutter rig in open-loop mode (no control active) measured across multiple days. Bistable behaviour is evident for flow velocities between approximately 14\,m/s and 25\,m/s where a stable limit cycle oscillation in heave and pitch coexists with a stable equilibrium.}
 #     \label{fig:openloop}
 #   \end{figure}
-  @pgf 
+#   @pgf
 
 end
-
