@@ -3,7 +3,7 @@ module AeroelasticCBC
 using StaticArrays: @SVector, @SMatrix
 using ComponentArrays: ComponentArrays, ComponentArray
 using BifurcationKit: BifurcationKit, BifurcationProblem, ContinuationPar, NewtonPar,
-                      PeriodicOrbitTrapProblem, PALC, continuation, ContinuousEvent
+                      PeriodicOrbitTrapProblem, PALC, continuation, ContinuousEvent, SaveAtEvent
 using Setfield: @lens, @set, @set!
 using LinearAlgebra: norm
 using OrdinaryDiffEq: ODEProblem, solve, Tsit5
