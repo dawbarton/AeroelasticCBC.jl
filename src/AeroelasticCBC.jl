@@ -7,17 +7,14 @@ using BifurcationKit: BifurcationKit, BifurcationProblem, ContinuationPar, Newto
 using Setfield: @lens, @set, @set!
 using LinearAlgebra: norm
 using OrdinaryDiffEq: ODEProblem, solve, Tsit5
-using PGFPlotsX: PGFPlotsX, @pgf
+using PGFPlotsX: PGFPlotsX, @pgf, Axis, PlotInc
 
-push!(PGFPlotsX.CUSTOM_PREAMBLE, "\\usepackage{unicode-math}")
-push!(PGFPlotsX.CUSTOM_PREAMBLE, "\\setmainfont{TeX Gyre Heros}")
-push!(PGFPlotsX.CUSTOM_PREAMBLE, "\\setmathfont{TeX Gyre Pagella Math}")
-push!(PGFPlotsX.CLASS_OPTIONS, "12pt")
+const OUTPATH = joinpath(@__DIR__, "output")
 
 include("model.jl")
 include("bifurcation.jl")
 include("tartaruga/Tartaruga.jl")
-
+include("plotting.jl")
 
 end # module
 

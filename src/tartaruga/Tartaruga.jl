@@ -48,7 +48,7 @@ function pts_to_csv(infile)
         heave[i] = sum(fsin .* x1) .* 2 / (SAMPLE_FREQ * n * T)
         residual[i] = sum(fsin .* (x1 .- x1_target)) .* 2 / (SAMPLE_FREQ * n * T)
     end
-    return [(heave=heave[i], residual=residual[i], frequency=frequency[i]) for i in eachindex(heave)]
+    return ["heave"=>heave, "residual"=>residual, "frequency"=>frequency]
 end
 
 function data_grid()
@@ -65,20 +65,26 @@ function data_timeseries_uncontrolled()
     output = []
     data = matread(joinpath(BASEPATH, "20092018_V20_PhasePlot_SwitchOff_Control.mat"))
     maxlength = length(data["Heave_AfterSwitchOff_Equilibrium"])
+    #
     heave = data["Heave_BeforeSwitchOff"]*10 # convert to mm
     derivative = data["DerivativeHeave_BeforeSwitchOff"]*10 # convert to mm
     time = range(0, step=1/SAMPLE_FREQ, length=maxlength)
-    ts = [(time=time[i], heave=heave[i], derivative=derivative[i]) for i in 1:TIMESERIES_DOWNSAMPLE:length(time)]
+    idx = 1:TIMESERIES_DOWNSAMPLE:length(time)
+    ts = ["time"=>time[idx], "heave"=>heave[idx], "derivative"=>derivative[idx]]
     push!(output, "unstable"=>ts)
+    #
     heave = data["Heave_AfterSwitchOff_StableLCO"]*10 # convert to mm
     derivative = data["DerivativeHeave_AfterSwitchOff_StableLCO"]*10 # convert to mm
     time = range(0, step=1/SAMPLE_FREQ, length=maxlength) .+ 0.054  # shift to align better (autonomous so time is arbitrary)
-    ts = [(time=time[i], heave=heave[i], derivative=derivative[i]) for i in 1:TIMESERIES_DOWNSAMPLE:length(time)]
+    idx = 1:TIMESERIES_DOWNSAMPLE:length(time)
+    ts = ["time"=>time[idx], "heave"=>heave[idx], "derivative"=>derivative[idx]]
     push!(output, "lco"=>ts)
+    #
     heave = data["Heave_AfterSwitchOff_Equilibrium"]*10 # convert to mm
     derivative = data["DerivativeHeave_AfterSwitchOff_Equilibrium"]*10 # convert to mm
     time = range(0, step=1/SAMPLE_FREQ, length=maxlength)
-    ts = [(time=time[i], heave=heave[i], derivative=derivative[i]) for i in 1:TIMESERIES_DOWNSAMPLE:length(time)]
+    idx = 1:TIMESERIES_DOWNSAMPLE:length(time)
+    ts = ["time"=>time[idx], "heave"=>heave[idx], "derivative"=>derivative[idx]]
     push!(output, "eq"=>ts)
     return Dict(output)
 end
@@ -153,10 +159,11 @@ function data_openloop()
     lco = openloop()
     for (i, date) in enumerate(sort(unique(lco.dates)))
         idx = findall(lco.dates .== date)
-        push!(output, "day$i" => [(velocity=lco.velocities[j], heave=lco.amplitudes[j]) for j in idx])
+        push!(output, "day$i" => ["velocity"=>lco.velocities[idx], "heave"=>lco.amplitudes[idx]])
     end
-    push!(output, "eq" => [(velocity=velocity, heave=0) for velocity in sort(collect(openloop_eq()))])
-    return output
+    data = sort(collect(openloop_eq()))
+    push!(output, "eq" => ["velocity"=>data, "heave"=>zeros(size(data))])
+    return Dict(output)
 end
 
 end
