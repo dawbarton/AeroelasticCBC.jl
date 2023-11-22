@@ -15,6 +15,7 @@ include("model.jl")
 include("bifurcation.jl")
 include("tartaruga/Tartaruga.jl")
 include("plotting.jl")
+include("figures.jl")
 
 end # module
 

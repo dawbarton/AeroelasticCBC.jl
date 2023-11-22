@@ -1,5 +1,4 @@
 norminf(x) = norm(x, Inf)
-recordEQ(x, p) = (h = x[1], α = x[2], w = x[3])
 
 function recordPO(x, p)
     xtt = BifurcationKit.get_periodic_orbit(p.prob, x, p.p)
@@ -13,8 +12,7 @@ function trace_from_equilibrium(p0; save_par = nothing)
     u0 = zeros(6)
 
     # Equilibrium problem
-    prob = BifurcationProblem(unsteady_model, u0, p0, (@lens _.U);
-                              record_from_solution = recordEQ)
+    prob = BifurcationProblem(unsteady_model, u0, p0, (@lens _.U))
     opts_br = ContinuationPar(p_min = 0.0, p_max = 25.0, ds = -0.1, dsmax = 0.1,
                               n_inversion = 8,
                               detect_bifurcation = 3, max_bisection_steps = 25, nev = 3,
